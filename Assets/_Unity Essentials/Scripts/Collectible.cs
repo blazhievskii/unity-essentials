@@ -1,33 +1,32 @@
-using System;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class CollectibleItem : MonoBehaviour
 {
+    
     public float rotationSpeed;
     public GameObject onCollectEffect;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        // Проверяем, был ли предмет уже собран
+        if (PlayerPrefs.GetInt("ItemCollected_" + gameObject.name, 0) == 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Rotate(0,rotationSpeed, 0);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        // Destroy the collectible
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            GameManager.Instance.CollectItem(gameObject);
             Instantiate(onCollectEffect, transform.position, transform.rotation);
         }
-     
-        
     }
 }
+
