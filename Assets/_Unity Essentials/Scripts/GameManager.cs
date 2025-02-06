@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private int collectedItems = 0; // Количество собранных предметов
+    private Vector3 lastCheckpointPosition; // Позиция последнего чекпоинта
+    private bool isRestarting = false; // Флаг рестарта
 
     private void Awake()
     {
@@ -21,49 +22,55 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Загружаем количество собранных предметов
-        collectedItems = PlayerPrefs.GetInt("CollectedItems_" + SceneManager.GetActiveScene().name, 0);
-    }
-
-    private void Update()
-    {
-        // Если нажата клавиша R — перезапускаем уровень
-        if (Input.GetKeyDown(KeyCode.R))
+        // Проверяем, это рестарт или новая игра
+        if (PlayerPrefs.GetInt("IsRestarting", 0) == 1) 
         {
-            RestartLevel();
+            LoadCheckpoint(); // Загружаем чекпоинт (будет вызван до старта сцены)
         }
-        
-        if (Input.GetKeyDown(KeyCode.T)) 
-        {
-            ResetProgress();
-        }
-    }
-
-    public void CollectItem(GameObject item)
-    {
-        collectedItems++;
-        PlayerPrefs.SetInt("CollectedItems_" + SceneManager.GetActiveScene().name, collectedItems);
-        PlayerPrefs.SetInt("ItemCollected_" + item.name, 1);
-        PlayerPrefs.Save();
-
-        Destroy(item);
-    }
-
-    public int GetCollectedItems()
-    {
-        return collectedItems;
     }
 
     public void RestartLevel()
     {
+        PlayerPrefs.SetInt("IsRestarting", 1); // Фиксируем, что это рестарт
+        PlayerPrefs.Save();
+        SceneManager.sceneLoaded += OnSceneLoaded; // Подписываемся на событие загрузки сцены
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
-    public void ResetProgress()
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        PlayerPrefs.DeleteAll(); // Удаляем все сохранённые данные
-        PlayerPrefs.Save();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Перезапускаем уровень
+        LoadCheckpoint(); // Перемещаем игрока в чекпоинт сразу после загрузки сцены
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Отписываемся от события (чтобы не вызывалось постоянно)
     }
 
+    private void LoadCheckpoint()
+    {
+        if (PlayerPrefs.HasKey("SpawnX"))
+        {
+            lastCheckpointPosition = new Vector3(
+                PlayerPrefs.GetFloat("SpawnX"),
+                PlayerPrefs.GetFloat("SpawnY"),
+                PlayerPrefs.GetFloat("SpawnZ")
+            );
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = lastCheckpointPosition;
+                Debug.Log($"✅ Игрок загружен в чекпоинт: {lastCheckpointPosition}");
+            }
+        }
+
+        // Сбрасываем флаг рестарта, чтобы после перезапуска игры игрок начинал с начала
+        PlayerPrefs.SetInt("IsRestarting", 0);
+        PlayerPrefs.Save();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
+        }
+    }
 }
