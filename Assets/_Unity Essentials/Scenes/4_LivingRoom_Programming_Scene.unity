@@ -799,7 +799,7 @@ PrefabInstance:
     - target: {fileID: 8702807591226703746, guid: bf3ac59fc056941e089b93eca14a1e50,
         type: 3}
       propertyPath: m_Name
-      value: RobotVacuum_1
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8702807591226703746, guid: bf3ac59fc056941e089b93eca14a1e50,
         type: 3}
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   rotationSpeed: 64
-  jumpForce: 5
+  jumpForce: 3
   flipThreshold: 120
   flipCheckTime: 2
   resetDelay: 1.5

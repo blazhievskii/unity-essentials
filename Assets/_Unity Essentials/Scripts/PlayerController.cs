@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 120.0f;
     public float jumpForce = 5.0f;
 
-    public float flipThreshold = 120f; // Угол, при котором считается, что персонаж перевернулся
-    public float flipCheckTime = 2.0f; // Время, которое нужно провести в перевернутом состоянии
-    public float resetDelay = 1.5f; // Время перед респауном
+    public float flipThreshold = 120f;
+    public float flipCheckTime = 2.0f;
+    public float resetDelay = 1.5f;
 
     public GameObject explosionEffect;
 
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool isResetting = false;
     private float flipStartTime = 0f;
     private bool isFlipping = false;
+    private bool isGrounded = false;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isResetting) return;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            isFlipping = false; // Сбрасываем таймер, если вернулся в нормальное положение
+            isFlipping = false;
         }
     }
 
@@ -62,6 +63,21 @@ public class PlayerController : MonoBehaviour
         rb.MoveRotation(rb.rotation * turnRotation);
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        // Устанавливаем isGrounded в true, если персонаж касается любой поверхности
+        if (collision.contactCount > 0)
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Как только персонаж перестаёт касаться поверхности, сбрасываем isGrounded
+        isGrounded = false;
+    }
+
     private bool IsFlipped()
     {
         float angleX = Mathf.Abs(transform.eulerAngles.x);
@@ -75,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         while (Time.time - flipStartTime < flipCheckTime)
         {
-            if (!IsFlipped()) yield break; // Если робот вернулся в нормальное положение, респаун отменяется
+            if (!IsFlipped()) yield break;
             yield return null;
         }
 
