@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3363182403880387809}
   - component: {fileID: 668955906212524075}
   - component: {fileID: 315137588540735582}
+  - component: {fileID: 3006611175143329140}
   m_Layer: 0
   m_Name: Collectible_GemDiamond
   m_TagString: Untagged
@@ -59,6 +60,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -105,3 +109,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.008316507, y: 0.008831046, z: 0.008583216}
   m_Center: {x: -0.00012399661, y: -0.0018298863, z: -0.00027787534}
+--- !u!114 &3006611175143329140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317416871093195262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6621bbfce5a460841b7e16b0cb6b06d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 9163842254569548763, guid: a64312fe794124baa923bcca22ea4631,
+    type: 3}
+  soundOnCollision: {fileID: 8300000, guid: 6fede028ba58b48d08e05b2bff883359, type: 3}
