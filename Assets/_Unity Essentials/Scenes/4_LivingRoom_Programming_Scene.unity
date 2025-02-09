@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 456168790}
   - component: {fileID: 456168789}
   - component: {fileID: 456168788}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: "\u0421eiling"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2625,12 +2625,12 @@ PrefabInstance:
     - target: {fileID: 5186813681815904175, guid: 625a16b402cfd487494f48992994e27e,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6458102967195283430, guid: 625a16b402cfd487494f48992994e27e,
         type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572742035931642408, guid: 625a16b402cfd487494f48992994e27e,
         type: 3}

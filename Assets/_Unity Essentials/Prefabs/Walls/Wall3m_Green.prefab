@@ -10,13 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 145886372465659096, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 71e87038bf775fc45b3e16ed33163afa, type: 2}
+    - target: {fileID: 3248982512684502177, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3862829468213153119, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
         type: 3}
       propertyPath: m_Name
       value: Wall3m_Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862829468213153119, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4526212475337693157, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
         type: 3}
@@ -72,6 +82,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985098693318107852, guid: 6fe6a5df5ce28bc4fa5ad864a711723d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
