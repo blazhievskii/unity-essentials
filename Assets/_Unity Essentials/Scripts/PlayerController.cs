@@ -30,11 +30,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isResetting) return;
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        // Прыжок выполняется только если персонаж не перевёрнут
+        if (!IsFlipped() && Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
+        // Если персонаж перевёрнут, запускаем процесс обработки переворота (взрыв и респаун)
         if (IsFlipped())
         {
             if (!isFlipping)
@@ -53,6 +55,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (isResetting) return;
+
+        // Если персонаж перевёрнут, не обрабатываем движение и поворот
+        if (IsFlipped())
+            return;
 
         float moveVertical = Input.GetAxis("Vertical");
         Vector3 movement = transform.forward * moveVertical * speed * Time.fixedDeltaTime;
@@ -83,15 +89,16 @@ public class PlayerController : MonoBehaviour
         float angleX = Mathf.Abs(transform.eulerAngles.x);
         float angleZ = Mathf.Abs(transform.eulerAngles.z);
 
-        return angleX > flipThreshold && angleX < 360 - flipThreshold ||
-               angleZ > flipThreshold && angleZ < 360 - flipThreshold;
+        return (angleX > flipThreshold && angleX < 360 - flipThreshold) ||
+               (angleZ > flipThreshold && angleZ < 360 - flipThreshold);
     }
 
     private IEnumerator WaitBeforeReset()
     {
         while (Time.time - flipStartTime < flipCheckTime)
         {
-            if (!IsFlipped()) yield break;
+            if (!IsFlipped())
+                yield break;
             yield return null;
         }
 
