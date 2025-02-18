@@ -38,7 +38,11 @@ After completing this project, I’ll continue learning Unity and programming to
 
 ---
 
-## 📷 Screenshots (Coming Soon)
+## 📷 Video
+
+
+https://github.com/user-attachments/assets/a5015593-c25a-4cca-bed5-0c739a9ca882
+
 
 
 ---
