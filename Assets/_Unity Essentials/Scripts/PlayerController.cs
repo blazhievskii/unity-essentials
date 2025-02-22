@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
+    public float boostSpeed = 10.0f; // Ускоренная скорость
+    public float boostDuration = 3.0f; // Длительность ускорения
     public float rotationSpeed = 120.0f;
     public float jumpForce = 5.0f;
 
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float flipStartTime = 0f;
     private bool isFlipping = false;
     private bool isGrounded = false;
+    private bool isBoosted = false;
 
     private void Start()
     {
@@ -30,13 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isResetting) return;
 
-        // Прыжок выполняется только если персонаж не перевёрнут
         if (!IsFlipped() && Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        // Если персонаж перевёрнут, запускаем процесс обработки переворота (взрыв и респаун)
         if (IsFlipped())
         {
             if (!isFlipping)
@@ -56,7 +57,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isResetting) return;
 
-        // Если персонаж перевёрнут, не обрабатываем движение и поворот
         if (IsFlipped())
             return;
 
@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        // Устанавливаем isGrounded в true, если персонаж касается любой поверхности
         if (collision.contactCount > 0)
         {
             isGrounded = true;
@@ -80,8 +79,28 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        // Как только персонаж перестаёт касаться поверхности, сбрасываем isGrounded
         isGrounded = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SpeedBoost"))
+        {
+            StartCoroutine(SpeedBoost());
+        }
+    }
+
+    private IEnumerator SpeedBoost()
+    {
+        if (isBoosted) yield break;
+        isBoosted = true;
+
+        float originalSpeed = speed;
+        speed = boostSpeed;
+        yield return new WaitForSeconds(boostDuration);
+
+        speed = originalSpeed;
+        isBoosted = false;
     }
 
     private bool IsFlipped()
