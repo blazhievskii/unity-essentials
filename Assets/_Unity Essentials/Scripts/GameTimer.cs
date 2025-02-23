@@ -57,7 +57,7 @@ public class GameTimer : MonoBehaviour
         if (finalTimeText != null)
         {
             finalTimeText.gameObject.SetActive(true);
-            finalTimeText.text = $"Congratulations!\nYour time: {minutes:00}:{seconds:00}\\n\\nShare your time in the comments if you’ve beaten the previous record!";
+            finalTimeText.text = $"Congratulations!\nYour time: {minutes:00}:{seconds:00}\\n\\nShare your time in the comments if you’ve beaten the previous record =)";
             Debug.Log("FinalTimeText Activated");
         }
 
