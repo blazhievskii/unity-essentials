@@ -1,10 +1,14 @@
 using UnityEngine;
 using TMPro;
-using System; // Required for Type handling
+using System; // Для класса Type
 
 public class UpdateCollectibleCount : MonoBehaviour
 {
-    private TextMeshProUGUI collectibleText; // Reference to the TextMeshProUGUI component
+    private TextMeshProUGUI collectibleText;
+
+    // Нужно, чтобы один раз остановить таймер, 
+    // и не дергать его повторно в каждом кадре
+    private bool timerAlreadyStopped = false;
 
     void Start()
     {
@@ -14,7 +18,7 @@ public class UpdateCollectibleCount : MonoBehaviour
             Debug.LogError("UpdateCollectibleCount script requires a TextMeshProUGUI component on the same GameObject.");
             return;
         }
-        UpdateCollectibleDisplay(); // Initial update on start
+        UpdateCollectibleDisplay(); // Однократный вызов на старте
     }
 
     void Update()
@@ -26,21 +30,34 @@ public class UpdateCollectibleCount : MonoBehaviour
     {
         int totalCollectibles = 0;
 
-        // Check and count objects of type Collectible
+        // Проверяем объекты типа Collectible
         Type collectibleType = Type.GetType("Collectible");
         if (collectibleType != null)
         {
             totalCollectibles += UnityEngine.Object.FindObjectsByType(collectibleType, FindObjectsSortMode.None).Length;
         }
 
-        // Optionally, check and count objects of type Collectible2D as well if needed
+        // Если есть Collectible2D, тоже считаем
         Type collectible2DType = Type.GetType("Collectible2D");
         if (collectible2DType != null)
         {
             totalCollectibles += UnityEngine.Object.FindObjectsByType(collectible2DType, FindObjectsSortMode.None).Length;
         }
 
-        // Update the collectible count display
+        // Отображаем текущее число
         collectibleText.text = $"Collectibles remaining: {totalCollectibles}";
+
+        // Если все предметы собраны - останавливаем таймер (один раз)
+        if (totalCollectibles == 0 && !timerAlreadyStopped)
+        {
+            timerAlreadyStopped = true;
+
+            // Ищем в сцене наш скрипт GameTimer и вызываем StopTimer()
+            GameTimer timer = FindObjectOfType<GameTimer>();
+            if (timer != null)
+            {
+                timer.StopTimer();
+            }
+        }
     }
 }
