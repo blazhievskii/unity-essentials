@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AudioSwitchOnCollision : MonoBehaviour
 {
-    private AudioSource audioSource; 
-    public AudioClip newClip; 
-    private bool hasSwitched = false; 
+    private AudioSource audioSource;
+    public AudioClip newClip;
+    private bool hasSwitched = false;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class AudioSwitchOnCollision : MonoBehaviour
         {
             audioSource.clip = newClip;
             audioSource.Play();
-            hasSwitched = true; 
+            hasSwitched = true;
         }
     }
 }

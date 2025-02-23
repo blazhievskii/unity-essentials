@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-   
     public GameObject explosionEffect;
     public AudioClip soundOnCollision;
 
     private void Start()
     {
-        gameObject.SetActive(true); // Всегда включаем предмет при старте
+        gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,12 +18,12 @@ public class Collectible : MonoBehaviour
             {
                 Instantiate(explosionEffect, transform.position, Quaternion.identity);
             }
-            
+
             if (soundOnCollision != null)
             {
                 AudioSource.PlayClipAtPoint(soundOnCollision, transform.position);
             }
-            
+
             Destroy(gameObject);
         }
     }

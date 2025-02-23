@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
-    public float boostSpeed = 10.0f; // Ускоренная скорость
-    public float boostDuration = 3.0f; // Длительность ускорения
+    public float boostSpeed = 10.0f;
+    public float boostDuration = 3.0f;
     public float rotationSpeed = 120.0f;
     public float jumpForce = 5.0f;
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        // Проверка на переворот
+
         if (IsFlipped())
         {
             if (!isFlipping)
@@ -83,16 +83,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Если вошли в триггер ускорения
         if (other.CompareTag("SpeedBoost"))
         {
             StartCoroutine(SpeedBoost());
         }
-        // Если вошли в "опасную зону"
-        else if (other.CompareTag("ExplosionZone")) // <-- Укажите нужный вам тэг
+
+        else if (other.CompareTag("ExplosionZone"))
         {
-            // Вызовем ту же логику, что и при перевороте (взрыв + респаун),
-            // но без ожидания flipCheckTime
             StartCoroutine(ExplodeAndRespawn());
         }
     }
@@ -110,7 +107,7 @@ public class PlayerController : MonoBehaviour
         isBoosted = false;
     }
 
-    // Проверяем, перевернут ли игрок
+
     private bool IsFlipped()
     {
         float angleX = Mathf.Abs(transform.eulerAngles.x);
@@ -120,7 +117,7 @@ public class PlayerController : MonoBehaviour
                (angleZ > flipThreshold && angleZ < 360 - flipThreshold);
     }
 
-    // Корутин, который ждёт немного времени, чтобы убедиться, что персонаж всё ещё перевёрнут
+
     private IEnumerator WaitBeforeReset()
     {
         while (Time.time - flipStartTime < flipCheckTime)
@@ -138,8 +135,6 @@ public class PlayerController : MonoBehaviour
         if (isResetting) yield break;
         isResetting = true;
 
-        Debug.Log("❌ Персонаж перевернулся! Взрыв и респаун...");
-
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
@@ -152,13 +147,11 @@ public class PlayerController : MonoBehaviour
         Respawn();
     }
 
-    // Тот же механизм, но вызывается сразу при попадании в опасную зону (без ожидания flipCheckTime)
+
     private IEnumerator ExplodeAndRespawn()
     {
         if (isResetting) yield break;
         isResetting = true;
-
-        Debug.Log("❌ Персонаж подорвался в опасной зоне! Взрыв и респаун...");
 
         if (explosionEffect != null)
         {
@@ -174,7 +167,6 @@ public class PlayerController : MonoBehaviour
 
     private void Respawn()
     {
-        Debug.Log("🔄 Персонаж возвращён в чекпоинт.");
         transform.position = lastCheckpoint;
         transform.rotation = Quaternion.identity;
         rb.isKinematic = false;
