@@ -8,6 +8,7 @@ TagManager:
   - Dirt
   - CinemachineTarget
   - SpeedBoost
+  - ExplosionZone
   layers:
   - Default
   - TransparentFX
