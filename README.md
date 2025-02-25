@@ -1,57 +1,60 @@
-# Robovac Adventure — Mini-Game Project 🚀
+# **Robo-SOS diamond thief — Mini-Game Project 🚀**  
 
-## 📜 Project Description
-**Robovac Adventure** is a mini-game developed in Unity where I practice and improve my game development skills. The story is simple: a robot vacuum cleaner embarks on an adventure across six different locations, overcoming various obstacles.
+## 📜 **Project Description**  
+**Robo-SOS diamond thief** is a fast-paced mini-game developed in Unity. In this game, you control a **robot vacuum cleaner thief** on a mission to **steal as many diamonds as possible in the shortest time**.  
 
-- 🧩 The **first part** of the game (Levels 1–3) consists of 3D puzzles and parkour challenges.
-- 🎮 The **second part** (Levels 4–6) is a 2D Sokoban-style game with logic-based gameplay.
 
-The goal of this project is to strengthen my Unity skills and gain hands-on experience in game development. It’s not a groundbreaking game — just a personal learning project as I take my first steps into game creation. After completing it, I’ll move on to the next Unity course with a focus on programming.
+- 💎 **Objective:** Collect all diamonds as quickly as possible to set a new record.  
+- 🏎 **Gameplay:** Speed and precision are key to mastering the heist.  
+- 🎮 **Level:** The game consists of **one challenging level** designed for replayability.  
 
----
-
-## 🤖 AI Usage
-Since my current knowledge of C# and the Unity API is still limited, I actively use AI (including ChatGPT) to assist with writing and adapting code.  
-**All the code** for this project is generated with the help of AI, while my main task is to integrate it into the project and test how it works.
-
-At this stage, I’m not aiming to dive too deeply into programming. Instead, the focus is to become familiar with Unity and create basic game mechanics.  
+Originally, this project was meant to be a learning exercise, but it has now evolved into a ** game**. The focus remains on improving my Unity development skills while creating engaging gameplay.  
 
 ---
 
-## 🎯 Project Goals
-- **Strengthen basic Unity skills**  
-- **Learn how to create simple 3D and 2D games**  
-- **Complete this project and move on to the next learning phase**
+## 🎮 **[Play the Game Online (Click)](https://play.unity.com/en/games/48cec2d3-cf02-4fe3-9d93-0707bc153032/robo-sos-diamond-thief)**
+
+## 🤖 **AI Usage**  
+To accelerate development, I used AI (including ChatGPT) for **code generation and adaptation**.  
+My role was to integrate, test, and refine the mechanics to ensure smooth gameplay.  
 
 ---
 
-## 🎮 Game Structure
-1. **First 3 Levels (3D):** Third-person puzzles and parkour challenges  
-2. **Last 3 Levels (2D):** Sokoban-style gameplay with logic and object-moving elements  
+## 🎯 **Project Goals**  
+- **Develop a fun and replayable mini-game**  
+- **Enhance Unity development skills**  
+- **Publish a finished game instead of just a prototype**  
 
 ---
 
-## ✨ Conclusion
-This is an educational project designed to help me gradually master the basics of Unity.  
-It’s not meant to be a big or complex game, but it’s a valuable step toward becoming a better game developer.  
-After completing this project, I’ll continue learning Unity and programming to progress even further.  
+## 🎮 **Gameplay Features**  
+- **Fast-paced heist action** 🏃‍♂️💨  
+- **Single-level challenge** 🏆  
+- **Time-based scoring system** ⏳  
+- **Dynamic obstacles and movement mechanics**  
 
 ---
 
-## 📷 Video
-
-
-https://github.com/user-attachments/assets/a5015593-c25a-4cca-bed5-0c739a9ca882
-
-
+## ✨ **Conclusion**  
+**Robo-SOS diamond thief** is a completed **mini-game project** that serves as both a learning experience and a playable challenge.  
+I plan to continue improving my Unity and programming skills through future projects.  
 
 ---
 
-## 📌 Technologies Used
+## 📷 **Video and Images Preview**  
+
+![image](https://github.com/user-attachments/assets/701702d8-3669-4f7f-a82a-238a2a5e51ba)
+
+
+https://github.com/user-attachments/assets/48801afa-dd09-421e-841b-c817b1d870c0
+
+---
+
+## 📌 **Technologies Used**  
 - **Unity** (Version 6000.0.35f1)  
 - **C#** for scripting  
 - **AI Assistance:** ChatGPT  
 
 ---
 
-## 🎮 Play the Game Online (Coming Soon)
+## 🎮 **[Play the Game Online (Click)](https://play.unity.com/en/games/48cec2d3-cf02-4fe3-9d93-0707bc153032/robo-sos-diamond-thief)**
